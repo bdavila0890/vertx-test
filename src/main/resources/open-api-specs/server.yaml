@@ -1,0 +1,27 @@
+openapi: 3.0.0
+info:
+  title: Spacex Engines Server
+  description: Serves Spacex engines descriptions
+  version: 0.0.1
+paths:
+  /spacex/engines:
+    get:
+      operationId: getEngineList
+      summary: Returns a list of Spacex Engines.
+      responses:
+        '200':
+          description: A JSON array of current Spacex Engines
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+      x-vertx-event-bus: spacex_service.get
+
+

@@ -4,6 +4,7 @@ import com.bdavila.impl.EngineServiceImpl;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.serviceproxy.ServiceBinder;
@@ -26,7 +27,10 @@ public class HttpServerVerticle extends AbstractVerticle {
                 OpenAPI3RouterFactory routerFactory = res.result();
                 routerFactory.mountServicesFromExtensions();
                 Router router = routerFactory.getRouter();
-                HttpServer server = vertx.createHttpServer();
+                HttpServerOptions options = new HttpServerOptions()
+                        .setHost("0.0.0.0")
+                        .setPort(8080);
+                HttpServer server = vertx.createHttpServer(options);
                 server.requestHandler(router).listen();
                 startFuture.complete();
             }

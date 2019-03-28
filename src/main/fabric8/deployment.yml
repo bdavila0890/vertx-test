@@ -1,0 +1,13 @@
+spec:
+  template:
+    spec:
+      containers:
+        - name: vertxtest
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: JAVA_OPTIONS
+              value: '-Dvertx.cacheDirBase=/tmp'

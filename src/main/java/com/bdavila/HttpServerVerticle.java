@@ -20,7 +20,7 @@ public class HttpServerVerticle extends AbstractVerticle {
         new ServiceBinder(vertx)
                 .setAddress("spacex_service.get")
                 .register(EngineService.class, service);
-        OpenAPI3RouterFactory.create(vertx, "src/main/resources/open-api-specs/server.yaml", res -> {
+        OpenAPI3RouterFactory.create(vertx, "open-api-specs/server.yaml", res -> {
             if (res.failed()) {
                 startFuture.fail(res.cause());
             } else {

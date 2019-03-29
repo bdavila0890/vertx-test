@@ -7,6 +7,7 @@ import io.vertx.core.http.HttpClientRequest;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +28,14 @@ public class HttpServiceVerticleTest {
             async.complete();
         });
     }
+    @AfterClass
+    public static void tearDownServer(){
+        vertx.close();
+    }
 
     @Test
     public void shouldFailWith404(TestContext testContext) {
+
         Async async = testContext.async();
         HttpClientOptions options = new HttpClientOptions()
                 .setDefaultHost("0.0.0.0")
